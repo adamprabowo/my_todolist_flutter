@@ -1,21 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/task_list.dart';
 import './add_task_screen.dart';
-import '../models/task.dart';
+import '../models/task_data.dart';
 
-class TaskScreen extends StatefulWidget {
-  @override
-  _TaskScreenState createState() => _TaskScreenState();
-}
-
-class _TaskScreenState extends State<TaskScreen> {
-  List<Task> tasks = [
-    Task(name: 'Buy milk'),
-    Task(name: 'Buy eggs'),
-    Task(name: 'Buy bread'),
-  ];
-
+class TaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,9 +23,9 @@ class _TaskScreenState extends State<TaskScreen> {
                     bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: AddTaskScreen(
                   (newTaskTitle) {
-                    setState(() {
-                      tasks.add(Task(name: newTaskTitle));
-                    });
+//                    setState(() {
+//                      tasks.add(Task(name: newTaskTitle));
+//                    });
                     Navigator.pop(context);
                   },
                 ),
@@ -73,7 +63,7 @@ class _TaskScreenState extends State<TaskScreen> {
                       fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  '${tasks.length} Task',
+                  '${Provider.of<TaskData>(context).taskCount} Task',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -93,8 +83,8 @@ class _TaskScreenState extends State<TaskScreen> {
                 ),
               ),
               child: TaskList(
-                tasks: tasks,
-              ),
+//                tasks: tasks,
+                  ),
             ),
           ),
         ],
